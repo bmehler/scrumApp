@@ -1,0 +1,22 @@
+      <%= form_for @productbacklog, html: { role: 'form'} do |f| %>
+        <% if @productbacklog.errors.any? %>
+          <div class="alert alert-danger class="alert alert-danger">
+            <ul>
+              <% @productbacklog.errors.full_messages.each do |msg| %>
+                <li>
+                  <%= msg %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="form-group">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, :class => 'form-control' %>
+       </div>
+       <div class="form-group">
+         <%= f.label :status_id %><br>
+         <%= f.select(:status_id, options_for_select([['not refined', 1], ['in progress', 2], ['closed', 3]], @productbacklog.status_id ), {}, { class: 'form-control' }) %>
+       </div>
+       <%= f.submit :class => 'btn btn-info' %>
+      <% end %>
